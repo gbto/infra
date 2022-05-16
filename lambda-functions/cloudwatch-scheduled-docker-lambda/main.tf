@@ -1,7 +1,7 @@
 # Lambda function
 resource "aws_lambda_function" "lambda" {
   function_name = "${var.project_name}-${var.function_name}-${var.env_name}"
-  image_uri     = "${var.aws_account_id}.dkr.ecr.eu-west-3.amazonaws.com/${var.project_name}-${var.function_name}-${var.env_name}:latest"
+  image_uri     = "${var.aws_account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.project_name}-${var.function_name}-${var.env_name}:latest"
   package_type  = "Image"
   architectures = ["x86_64"]
   role          = aws_iam_role.lambda.arn
