@@ -1,6 +1,7 @@
 # EKS / RDS secured deployment
 
 This repository contains terraform code to deploy an AWS environment with:
+
 - A VPC containing 8 subnets (4 privates, 4 publics)
 - A PostGre RDS database
 - A cluster EKS with 2 workers (1 private, 1 public)
@@ -34,12 +35,11 @@ We define several security groups that controls inbound and outbound rules on th
 
 4. rds-access-from-pod: Allow inbound traffic to pod with TCP and UDP on port 53 and all outbound traffic.
 
-
 ## 3. K8s security group policy
 
 To be completed.
 
-# Create a metabase user in RDS
+## Create a metabase user in RDS
 
 As explained above, to access RDS from an EKS pod, it'll be required to use a specific service account, that will be tied to an IAM role (i.e. security group) through a K8s security group policy. This implies that we need to create a Postgre user.
 
@@ -49,7 +49,8 @@ In particular, one would need to
 For this, one would need to create access control list inbound and outbound rules that allows traffic from a specific IP to both the internal and external RDS zone (traffic comes throught the internet gateway, then is routed to the public subnets that are ).
 
 Then, we can login PSQL with:
-```
+
+```sh
 #!/bin/bash
 cd ../terraform-plan/
 USER=$(terraform output rds-username)
@@ -63,16 +64,18 @@ psql \
    --password \
    --dbname="postgres"
 ```
+
 And finally create the user with:
-```
+```sh
 CREATE USER metabase;
 GRANT rds_iam TO metabase;
 CREATE DATABASE metabase;
 GRANT ALL ON DATABASE metabase TO metabase;
 ```
-# Run the kubernetes manifests
 
-```
+## Run the kubernetes manifests
+
+```sh
 #!/bin/zsh
 ROOT=$PWD
 
@@ -105,9 +108,8 @@ kubectl apply -f service-account.yaml
 kubectl apply -f deployment.yaml
 ```
 
-# Set-up instructions
+## Set-up instructions
 
 - Create an [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) and [install the CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 - Install [docker](https://docs.docker.com/desktop/), [kubernetes](https://kubernetes.io/docs/setup/) and [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - Install [PostgreSQL](https://www.postgresql.org/download/)
-

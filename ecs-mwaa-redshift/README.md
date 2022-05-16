@@ -2,15 +2,15 @@
 
 The data engineering resources that make up the platform used for running all the jobs.
 
-# Architecture diagram
+## Architecture diagram
 
-# Getting started:
+## Getting started
 
 ### AWS deployment
 
 To create S3 bucket backend:
 
-```
+```sh
 export ENV="dev"
 export REGION="us-east-1"
 export AWS_PROFILE="default"
@@ -22,7 +22,7 @@ export TERRAFORM_BUCKET_NAME="${PROJECT_NAME}-tf-states-${ENV}"
 
 To initialize the terraform project with S3 backend:
 
-```
+```sh
 terraform init \
         -backend-config="bucket=${TERRAFORM_BUCKET_NAME}" \
         -backend-config="key=${PROJECT_NAME}-platform-${ENV}.tfstate" \
@@ -31,7 +31,7 @@ terraform init \
 
 To create the deployment plan and apply it:
 
-```
+```sh
 # format the terraform code
 terraform fmt
 
@@ -47,7 +47,7 @@ terraform destroy
 
 To destroy the infrastructure, you need to delete all files in the bucket first:
 
-```
+```sh
 AWS_PROFILE="default"
 BUCKET_NAME=$(terraform output -json | jq -r .s3_bucket_name.value)
 aws s3 rm s3://${BUCKET_NAME} --recursive --profile $AWS_PROFILE

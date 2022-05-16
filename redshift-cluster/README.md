@@ -8,11 +8,11 @@ The terraform code of this folder provisions a Redshift cluster. It requires the
 - an internet gateway to access the cluster from outside the VPC
 - the redshift cluster
 
-# Set-up instructions
+## Set-up instructions
 
 To initialize the terraform project with S3 backend:
 
-```
+```sh
 export ENV="dev"
 export AWS_REGION="us-east-1"
 export AWS_PROFILE="default"
@@ -27,7 +27,7 @@ terraform init \
 
 To create the deployment plan and apply it:
 
-```
+```sh
 # format the terraform code
 terraform fmt
 

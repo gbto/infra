@@ -1,20 +1,20 @@
 # Example of lambda/cloudwatch/s3 deployment with terraform
 
-This folder contains terraform files developed for learning purposes. <br>
+This folder contains terraform files developed for learning purposes.
 
-Currently, it includes terraform code that creates the AWS resources necessary to create a Lambda function sending messages to a S3 bucket. The Lambda is triggered by a scheduled CloudWatch event configured to a 1 minute frequency and will send logs to CloudWatch console. <br>
+Currently, it includes terraform code that creates the AWS resources necessary to create a Lambda function sending messages to a S3 bucket. The Lambda is triggered by a scheduled CloudWatch event configured to a 1 minute frequency and will send logs to CloudWatch console.
 
 In addition to S3, CloudWatch and Lambda instances, should be created IAM role and policies to enable the Lambda function to:1. access AWS resources and services (cf. lambda's [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)) 2. write messages to S3 bucket (cf. [permissions to S3 buckets](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)) 3. send logs to Amazon CloudWatch (cf. [CloudWatch logs](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs.html))
 
-# Set-up instructions
+## Set-up instructions
 
 In order to run the code, you need to configure AWS CLI and set-up a profile. The name of the profile needs to be specified in the variables.tf to be accessed by terraform. All the variables necessary to parameterize the deployment of all the ressources of this project are configurable in the variables.tf file. This includes the aws profile name as used in any ``aws``` cli command, the name of the bucket to create the name of the environment used when tagging ressources.
 
-# Deploy the resources
+## Deploy the resources
 
 To initialize the terraform project with S3 backend:
 
-```
+```sh
 export ENV="dev"
 export AWS_REGION="us-east-1"
 export AWS_PROFILE="default"
@@ -29,7 +29,7 @@ terraform init \
 
 To create the deployment plan and apply it:
 
-```
+```sh
 # format the terraform code
 terraform fmt
 
@@ -45,7 +45,7 @@ terraform destroy
 
 To destroy the infrastructure, you need to delete all files in the bucket first:
 
-```
+```sh
 AWS_PROFILE="default"
 BUCKET_NAME=$(terraform output -json | jq -r .s3_bucket_name.value)
 aws s3 rm s3://${BUCKET_NAME} --recursive --profile $AWS_PROFILE
