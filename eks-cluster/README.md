@@ -66,6 +66,7 @@ psql \
 ```
 
 And finally create the user with:
+
 ```sh
 CREATE USER metabase;
 GRANT rds_iam TO metabase;

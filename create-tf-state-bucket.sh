@@ -1,5 +1,5 @@
 #!/bin/bash
-# Maintainer: Ledger data engineering team, <data-engineering@ledger.fr>
+# Maintainer: Quentin Gaborit, <gibboneto@gmail.com>
 # This script creates a bucket to store terraform states
 # Syntax: create-tf-state-bucket.sh [-e target folder] [-r region] [-p aws profile] [-b terraform bucket]
 
