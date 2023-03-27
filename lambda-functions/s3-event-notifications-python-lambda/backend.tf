@@ -1,10 +1,9 @@
 terraform {
   backend "s3" {
-    bucket                  = "gbto-tfstates-sbx"
-    key                     = "gbto-lambda-s3-notifications-dev.tfstate"
-    region                  = "us-east-1"
-    shared_credentials_file = "~/.aws/credentials"
-    profile                 = "default"
+    bucket                  = "gbto-tfstates-dev"
+    key                     = "terraform.tfstate"
+    workspace_key_prefix    = "lambda-s3-notifications"
+    region                  = "eu-west-1"
     encrypt                 = true
   }
 }

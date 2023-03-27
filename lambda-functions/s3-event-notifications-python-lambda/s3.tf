@@ -4,9 +4,9 @@ resource "aws_s3_bucket" "desktop" {
   bucket        = var.desktop_bucket_id
   force_destroy = true
   tags = {
-    Name        = "${var.project_name}-${var.function_name}-desktop-bucket-${var.env_name}"
-    Environment = var.env_name
-    Project     = var.project_name
+    Name        = "${var.namespace}-${var.function_name}-desktop-bucket-${var.environment}"
+    Environment = var.environment
+    Project     = var.namespace
   }
 }
 resource "aws_s3_bucket_acl" "desktop" {
@@ -37,9 +37,9 @@ resource "aws_s3_bucket" "mobile" {
   bucket        = var.mobile_bucket_id
   force_destroy = true
   tags = {
-    Name        = "${var.project_name}-${var.function_name}-mobile-bucket-${var.env_name}"
-    Environment = var.env_name
-    Project     = var.project_name
+    Name        = "${var.namespace}-${var.function_name}-mobile-bucket-${var.environment}"
+    Environment = var.environment
+    Project     = var.namespace
   }
 }
 # Create the bucket ACL

@@ -64,8 +64,8 @@ resource "aws_iam_role" "lambda" {
     policy = data.aws_iam_policy_document.policy_lambda_s3.json
   }
   tags = {
-    Name        = "${var.project_name}-${var.function_name}-role-${var.env_name}"
-    Environment = var.env_name
-    Project     = var.project_name
+    Name        = "${var.namespace}-${var.function_name}-role-${var.environment}"
+    Environment = var.environment
+    Project     = var.namespace
   }
 }

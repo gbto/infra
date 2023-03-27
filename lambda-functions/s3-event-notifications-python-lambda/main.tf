@@ -7,7 +7,7 @@ data "archive_file" "zip" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  function_name = "${var.project_name}-${var.function_name}-${var.env_name}"
+  function_name = "${var.namespace}-${var.function_name}-${var.environment}"
 
   filename         = data.archive_file.zip.output_path
   source_code_hash = data.archive_file.zip.output_base64sha256
@@ -18,12 +18,12 @@ resource "aws_lambda_function" "lambda" {
 
   memory_size                    = var.memory_size
   timeout                        = var.timeout
-  reserved_concurrent_executions = var.concurrent_executions
+  # reserved_concurrent_executions = var.concurrent_executions
 
   tags = {
-    Name        = "${var.project_name}-${var.function_name}-desktop-bucket-${var.env_name}"
-    Environment = var.env_name
-    Project     = var.project_name
+    Name        = "${var.namespace}-${var.function_name}-desktop-bucket-${var.environment}"
+    Environment = var.environment
+    Project     = var.namespace
   }
 }
 

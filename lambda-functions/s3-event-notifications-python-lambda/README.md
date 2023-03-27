@@ -29,7 +29,7 @@ To initialize the terraform project with S3 backend:
 
 ```sh
 export ENV="dev"
-export AWS_REGION="us-east-1"
+export AWS_REGION="eu-west-1"
 export AWS_PROFILE="default"
 export PROJECT_NAME="gbto"
 export TERRAFORM_BUCKET_NAME="${PROJECT_NAME}-tf-states-${ENV}"

@@ -1,19 +1,15 @@
-variable "aws_region" {
+variable "region" {
   description = "The AWS region where to instantiate the AWS resources"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-west-1"
 }
-variable "aws_profile" {
-  description = "The AWS local configuration that will be used"
-  type        = string
-  default     = "default"
-}
-variable "env_name" {
+
+variable "environment" {
   description = "The environment the resources belongs to"
   type        = string
   default     = "dev"
 }
-variable "project_name" {
+variable "namespace" {
   description = "The project name that will be used to create resources"
   type        = string
   default     = "gbto"
